@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "showdown": "^1.9.1",
+    "showdown-highlight": "^2.1.8",
     "vue": "^3.0.0"
   },
   "devDependencies": {
