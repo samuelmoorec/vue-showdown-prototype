@@ -8,6 +8,7 @@
 <script>
 var showdown = require("showdown"),
   showdownHighlight = require("showdown-highlight"),
+  cheerio = require('cheerio'),
   converter = new showdown.Converter({
     tables: true,
     extensions: [
@@ -28,8 +29,14 @@ export default {
   emits: ["update-markdown"],
   computed: {
     generatehtml() {
-      console.log("Rerendering");
-      return converter.makeHtml(this.markdownContent);
+      const parsedMD = "<div id='superuniqueboi'>" + converter.makeHtml(this.markdownContent) + "</div>"
+
+
+      let $cherrio = cheerio.load(parsedMD)
+      const allElements = $cherrio('#superuniqueboi').children().map(function(i,el){ return { htmlString: $cherrio(this).toString(), type: el.name }});
+      console.log(allElements)
+      // console.log(parsedMD)
+      return parsedMD;
     },
   },
 };
@@ -92,4 +99,34 @@ pre{
 code.hljs {
   color: #A9B7C6
 }
+
+code{
+padding: 1px 3px;
+    background-color: hsla(0,0%,93%,.5);
+}
+
+pre code{
+padding: 0;
+    background-color: transparent;
+}
+
+table {
+    border-spacing: 0;
+        box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%), 0 3px 1px -2px rgb(0 0 0 / 20%);
+}
+
+th{
+  min-width: 10rem;
+    background-color: rgba(0,0,0,.54);
+    color: #fff;
+    vertical-align: top;
+};
+
+code.hljs {
+  background-color: transparent;
+}
+
+td{
+  padding: 5px
+};
 </style>

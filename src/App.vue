@@ -19,10 +19,10 @@ export default {
   },
   methods: {
     updateMd(newMD) {
-            console.log("Before",this.markdownValue);
+            // console.log("Before",this.markdownValue);
 
       this.markdown = newMD;
-      console.log("After",this.markdownValue);
+      // console.log("After",this.markdownValue);
     },
   },
 };
@@ -50,5 +50,9 @@ main {
   display: flex;
     flex-direction: row;
     justify-content: space-around;
+}
+
+p{
+  font-size: 1em;
 }
 </style>
