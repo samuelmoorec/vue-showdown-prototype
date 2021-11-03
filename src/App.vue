@@ -1,16 +1,23 @@
 <template>
   <main>
-    <markdown-editor :markdown-content="markdown" @update-markdown="updateMd" />
+    <section>
+    <markdown-editor :markdownContent="markdown" @update-markdown="updateMd" />
+    </section>
+    <section>
+    <markdown-displayer :markdownContent="markdown" />
+    </section>
   </main>
 </template>
 
 <script>
 import MarkdownEditor from "./components/MarkdownEditor.vue";
+import MarkdownDisplayer from "./components/MarkdownDisplayer.vue"
 
 export default {
   name: "App",
   components: {
     MarkdownEditor,
+    MarkdownDisplayer
   },
   data() {
     return {
@@ -18,13 +25,13 @@ export default {
     };
   },
   methods: {
-    updateMd(newMD) {
-            // console.log("Before",this.markdownValue);
-
-      this.markdown = newMD;
-      // console.log("After",this.markdownValue);
+    updateMd(updatedMarkdown) { 
+      this.markdown = updatedMarkdown;
     },
-  },
+        say(message) {
+      alert(message)
+    }
+  }
 };
 </script>
 
@@ -44,15 +51,30 @@ body {
   min-height: 50vh;
   margin: 0;
   padding: 0;
+    -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 main {
 
   display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-start;
 }
 
 p{
   font-size: 1em;
+}
+
+section{
+  width: 50vw;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+body {
+
 }
 </style>
